@@ -1,0 +1,38 @@
+@font-face {
+	font-family: Helvetica;
+	src: url('./Helvetica-400.ttf') format('woff');
+}
+
+@font-face {
+	font-family: Robota;
+	src: url('./RobotaNonCommercialRegular-400.otf') format('woff');
+}
+
+:root{
+    --orange: #be410c;
+    --deep-blue: #000077;
+    --black: #000000;
+    --white: #ffffff;
+    --cream: #f5f5f5;
+    --h3-size: 60px;
+    --h3-responsive: 8.5vw;
+    --sub-heading: 40px;
+    --sub-responsive: 7vw;
+}
+
+a{
+    color: white !important;
+}
+
+a:hover{
+    text-decoration: none !important;
+}
+
+.zindex999{
+    z-index: 999 !important;
+}
+
+.rvp-zindex{
+    padding: 0;
+    z-index: 0 !important;
+}
