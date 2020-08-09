@@ -1,11 +1,14 @@
 <script>
 
+    import { onDestroy } from 'svelte';
+
     //BETI Typing animation---------------------------------------------------------------------
 
     var text = 'B. E. T. I.';
     var speed = 100;
     var chars = text.split('');
     let container;
+    let interval;
 
     var i = 0;
     var x = 1;
@@ -14,13 +17,17 @@
         var internalCallback = function(factor) {
             return function() {
                 if (++factor >= 0) {
-                    window.setTimeout(internalCallback, times);
+                    interval = window.setTimeout(internalCallback, times);
                     times = callback();
                 }
             }
         }(times, 0);
 
-        window.setTimeout(internalCallback, factor);
+        interval = window.setTimeout(internalCallback, factor);
+
+        onDestroy(() => {
+		    clearInterval(interval);
+	    });
     };
 
     setDeceleratingTimeout(function(){ 
@@ -63,6 +70,8 @@
             }
         )
     }
+
+    Zindex();
     
 
 

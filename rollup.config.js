@@ -8,6 +8,7 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default {
 	input: 'src/main.js',
+	external: [ 'swiper/css/swiper.css' ],
 	output: {
 		sourcemap: true,
 		format: 'iife',

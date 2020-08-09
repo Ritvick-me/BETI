@@ -2,8 +2,9 @@
 
     import { Router, Link, Route } from "svelte-routing";
     import HomePage from "../HomePage/HomePage.svelte";
+    import AboutPage from "../AboutPage/AboutUsPage.svelte";
+    import ServicesPage from "../ServicesPage/ServicePage.svelte";
 
-    export let url = "";
 
     let navToggler = true;
 
@@ -30,6 +31,8 @@
     }
 
     navScroller();
+
+    export let url = "";
 
 </script>
 
@@ -135,7 +138,28 @@
         overflow: hidden;
     }
     .rvp-row{
+        position: relative;
         height: 90vh;
+    }
+    .rvp-close{
+        position: absolute;
+        bottom: 20px;
+        margin: auto;
+    }
+    .rvp-close button{
+        border-style: solid;
+        border-color: var(--orange);
+        border-width: 2px;
+        font-size: 25px;
+        font-family: Helvetica;
+        background-color: var(--white);
+        color: var(--orange);
+        transition-duration: 0.5s;
+    }
+    .rvp-close button:hover{
+        border-color: var(--deep-blue);
+        transition-duration: 0.5s;
+        color: var(--deep-blue);
     }
     .rvp-modal-links{
         width: 200px;
@@ -234,6 +258,7 @@
 
 </style>
 
+
 <Router url="{url}">
     <nav class="{ navToggler ? 'navbar sticky-top navbar-expand-lg navbar-dark rvp-nav-bg' : 'rvp-nav-alt'}">
         <a class="navbar-brand" href=" "><img class="rvp-logo" src="../favicon.png" alt="logo"></a>
@@ -246,10 +271,13 @@
                     <Link to="/"><span class="{ navToggler ? 'nav-link rvp-links' : 'rvp-font-alt'}">Home</span></Link>
                 </li>
                 <li class="nav-item">
-                    <Link to="about-us"><span class="nav-link rvp-links">About Us</span></Link>
+                    <Link to="about"><span class="nav-link rvp-links">About Us</span></Link>
                 </li>
                 <li class="nav-item">
-                    <Link to="course"><span class="nav-link rvp-links">Course</span></Link>
+                    <Link to="services"><span class="nav-link rvp-links">Services</span></Link>
+                </li>
+                <li class="nav-item">
+                    <Link to="events"><span class="nav-link rvp-links">Events</span></Link>
                 </li>
                 <li class="nav-item">
                     <Link to="contact-us"><span class="nav-link rvp-links">Contact Us</span></Link>
@@ -257,24 +285,28 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid d-lg-none rvp-mobile-navbar rvp-disp-none" id="rvp-nav-modal">
-        <div class="rvp-closer text-right">
-            <button id="rvp-close-btn" on:click={closeModal}>
-                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11 rvp-cross" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path class="rvp-fade-out" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
-            </button>
-        </div>
-        <div class="row justify-content-center align-items-center rvp-row">
-            <div class="col col-auto text-center">
-                <Link to="/"><div class="rvp-modal-links">Home</div></Link>
-                <Link to="about-us"><div class="rvp-modal-links">About Us</div></Link>
-                <Link to="course"><div class="rvp-modal-links">Course</div></Link>
-                <Link to="contact-us"><div class="rvp-modal-links">Contact Us</div></Link>
+    <nav>
+        <div class="container-fluid d-lg-none rvp-mobile-navbar rvp-disp-none" id="rvp-nav-modal">
+            <div class="rvp-closer sticky-top text-right">
+                <button id="rvp-close-btn" on:click={closeModal}>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11 rvp-cross" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path class="rvp-fade-out" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+                </button>
+            </div>
+            <div class="row justify-content-center align-items-center rvp-row">
+                <div class="col col-auto text-center">
+                    <Link to="/"><div class="rvp-modal-links" on:click={closeModal}>Home</div></Link>
+                    <Link to="about"><div class="rvp-modal-links" on:click={closeModal}>About Us</div></Link>
+                    <Link to="services"><div class="rvp-modal-links" on:click={closeModal}>Services</div></Link>
+                    <Link to="contact-us"><div class="rvp-modal-links" on:click={closeModal}>Contact Us</div></Link>
+                </div>
+                <div class="rvp-close"><button on:click={closeModal}>Go back</button></div>
             </div>
         </div>
-    </div>
+    </nav>
     <div>
         <!-- <Route path="blog/:id" component="{BlogPost}" /> -->
-        <!-- <Route path="blog" component="{Blog}" /> -->
-        <Route path="/"><HomePage/></Route>
+        <Route path="about" component="{AboutPage}" />
+        <Route path="services" component="{ServicesPage}" />
+        <Route path="/"><HomePage /></Route>
     </div>
 </Router>

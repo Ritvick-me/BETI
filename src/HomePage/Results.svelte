@@ -224,7 +224,7 @@
                     <img src="../Images/Selected/IMG_20200112_124652.jpg" alt="" class="rvp-winners-image">
                 </div>
                 <div class="rvp-title">Winner</div>
-                <div class="rvp-name">Ritvick V. Pandey</div>
+                <div class="rvp-name">John Doe</div>
                 <div class="rvp-id">RA1811003010698</div>
             </div>
         </div>
@@ -237,7 +237,7 @@
                     <img src="../Images/Selected/IMG_20200112_124652.jpg" alt="" class="rvp-winners-image">
                 </div>
                 <div class="rvp-title">1<sup>st</sup> Runner Up</div>
-                <div class="rvp-name">Aanchal Saxena</div>
+                <div class="rvp-name">Richard Roe</div>
                 <div class="rvp-id">RA1811003010711</div>
             </div>
         </div>
@@ -250,7 +250,7 @@
                     <img src="../Images/Selected/IMG_20200112_124652.jpg" alt="" class="rvp-winners-image">
                 </div>
                 <div class="rvp-title">2<sup>nd</sup> Runner Up</div>
-                <div class="rvp-name">Jul'a M'dame</div>
+                <div class="rvp-name">Jane Roe</div>
                 <div class="rvp-id">RA1811003010069</div>
             </div>
         </div>
