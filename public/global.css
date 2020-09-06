@@ -1,14 +1,14 @@
 @font-face {
-	font-family: Helvetica;
-	src: url('./Helvetica-400.ttf') format('woff');
+    font-family: Helvetica;
+    src: url('./Helvetica-400.ttf') format('woff');
 }
 
 @font-face {
-	font-family: Robota;
-	src: url('./RobotaNonCommercialRegular-400.otf') format('woff');
+    font-family: Robota;
+    src: url('./RobotaNonCommercialRegular-400.otf') format('woff');
 }
 
-:root{
+:root {
     --orange: #be410c;
     --deep-blue: #000077;
     --black: #000000;
@@ -18,21 +18,32 @@
     --h3-responsive: 8.5vw;
     --sub-heading: 40px;
     --sub-responsive: 7vw;
+    --background-selection: #ff6929;
 }
 
-a{
+a {
     color: white !important;
 }
 
-a:hover{
+a:hover {
     text-decoration: none !important;
 }
 
-.zindex999{
+.zindex999 {
     z-index: 999 !important;
 }
 
-.rvp-zindex{
+.rvp-zindex {
     padding: 0;
     z-index: 0 !important;
+}
+
+*::-moz-selection {
+    color: var(--white) !important;
+    background: var(--background-selection) !important;
+}
+
+*::selection {
+    color: var(--white) !important;
+    background: var(--background-selection) !important;
 }
