@@ -1,8 +1,8 @@
 <script>
   import PageTopic from "../components/PageTopic.svelte";
   import Workshop from "./Workshop.svelte";
-  import Footer from "../components/Footer.svelte";
   import Tutorials from "./Tutorials.svelte";
+  import Footer from "../components/Footer.svelte";
 
   let hero = {
     pageName: "Events",

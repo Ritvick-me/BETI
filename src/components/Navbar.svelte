@@ -4,8 +4,11 @@
   import AboutPage from "../AboutPage/AboutUsPage.svelte";
   import ServicesPage from "../ServicesPage/ServicePage.svelte";
   import EventsPage from "../EventsPage/EventPage.svelte";
+  import Robospridh from "../EventsPage/Robospridh.svelte";
+  import Application from "../EventsPage/Application.svelte";
 
   let navToggler = true;
+  let eventToggler = false;
 
   function navScroller() {
     window.$(document).scroll(function() {
@@ -18,7 +21,21 @@
       window
         .$(".rvp-nav-bg .rvp-links")
         .toggleClass("rvp-font-alt", window.$(this).scrollTop() > 50);
+      // window
+      //   .$(".rvp-events")
+      //   .removeClass("rvp-white-arrow", window.$(this).scrollTop() > 50);
+      // window
+      //   .$(".rvp-events")
+      //   .addClass("rvp-white-arrow", window.$(this).scrollTop() < 50);
     });
+  }
+
+  function openDropDown() {
+    eventToggler = !eventToggler;
+  }
+
+  function closeDropDown() {
+    eventToggler = false;
   }
 
   function openModal() {
@@ -142,7 +159,8 @@
   }
   .rvp-row {
     position: relative;
-    height: 90vh;
+    height: 100vh;
+    margin-top: -80px;
   }
   .rvp-close {
     position: absolute;
@@ -231,6 +249,70 @@
     border-color: var(--black);
     background-color: var(--black);
   }
+  .rvp-events {
+    position: relative;
+  }
+  .rvp-events-pointer-open::after {
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-style: solid;
+    border-left-style: none;
+    border-top-style: none;
+    border-width: 3px;
+    border-color: var(--black);
+    top: 14px;
+    right: 8px;
+    transition-duration: 0.7s;
+    transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  .rvp-events-pointer-close::after {
+    transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  /* .rvp-white-arrow:after {
+    border-color: var(--white) !important;
+  } */
+  .rvp-events span {
+    cursor: pointer;
+  }
+  .rvp-drop-down {
+    position: absolute;
+    background-color: var(--white);
+    top: 58px;
+    left: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition-duration: 1s;
+  }
+  .rvp-drop {
+    max-height: 200px !important;
+    transition-duration: 1s;
+    box-shadow: 0px 0px 3px 1px var(--cream);
+  }
+  .rvp-drop-down ul {
+    list-style-type: none;
+    font-family: Helvetica;
+    padding: 0 20px;
+    width: 220px;
+  }
+  .rvp-drop-down ul li {
+    color: black !important;
+    margin: 5px 0;
+    transition-duration: 0.5s;
+  }
+  .rvp-drop-down ul li:hover {
+    color: var(--orange) !important;
+    transition-duration: 0.5s;
+  }
 
   @media (max-width: 992px) {
     .rvp-nav-bg {
@@ -263,9 +345,11 @@
 <Router {url}>
   <nav
     class={navToggler ? 'navbar sticky-top navbar-expand-lg navbar-dark rvp-nav-bg' : 'rvp-nav-alt'}>
-    <a class="navbar-brand" href=" ">
-      <img class="rvp-logo" src="../favicon.png" alt="logo" />
-    </a>
+    <div class="navbar-brand" href=" ">
+      <Link to="/">
+        <img class="rvp-logo" src="../favicon.png" alt="logo" />
+      </Link>
+    </div>
     <button
       class={navToggler ? 'navbar-toggler rvp-toggler' : 'rvp-toggler-alt'}
       type="button"
@@ -277,29 +361,53 @@
       <ul class="navbar-nav ml-lg-auto rvp-collapser">
         <li class="nav-item active">
           <Link to="/">
-            <span class={navToggler ? 'nav-link rvp-links' : 'rvp-font-alt'}>
+            <span
+              class={navToggler ? 'nav-link rvp-links' : 'rvp-font-alt'}
+              on:click={closeDropDown}>
               Home
             </span>
           </Link>
         </li>
         <li class="nav-item">
           <Link to="about">
-            <span class="nav-link rvp-links">About Us</span>
+            <span class="nav-link rvp-links" on:click={closeDropDown}>
+              About Us
+            </span>
           </Link>
         </li>
         <li class="nav-item">
           <Link to="services">
-            <span class="nav-link rvp-links">Services</span>
+            <span class="nav-link rvp-links" on:click={closeDropDown}>
+              Services
+            </span>
           </Link>
         </li>
-        <li class="nav-item">
-          <Link to="events">
-            <span class="nav-link rvp-links">Events</span>
-          </Link>
+        <li
+          class={eventToggler ? 'nav-item rvp-events rvp-events-pointer-open rvp-events-pointer-close' : 'nav-item rvp-events rvp-events-pointer-open'}>
+          <span class="nav-link rvp-links" on:click={openDropDown}>Events</span>
+          <div
+            class={eventToggler ? 'rvp-drop-down rvp-drop' : 'rvp-drop-down'}>
+            <ul>
+              <Link to="events">
+                <li on:click={closeDropDown}>Workshops</li>
+              </Link>
+              <Link to="events">
+                <li on:click={closeDropDown}>Tutorials</li>
+              </Link>
+              <Link to="robospridh">
+                <li on:click={closeDropDown}>Robospridh Competition</li>
+              </Link>
+              <Link to="application">
+                <li on:click={closeDropDown}>Register with us</li>
+              </Link>
+            </ul>
+          </div>
         </li>
         <li class="nav-item">
           <Link to="contact-us">
-            <span class="nav-link rvp-links">Contact Us</span>
+            <span class="nav-link rvp-links" on:click={closeDropDown}>
+              Contact Us
+            </span>
           </Link>
         </li>
       </ul>
@@ -346,6 +454,12 @@
           <Link to="events">
             <div class="rvp-modal-links" on:click={closeModal}>Events</div>
           </Link>
+          <Link to="robospridh">
+            <div class="rvp-modal-links" on:click={closeModal}>Robospridh</div>
+          </Link>
+          <Link to="application">
+            <div class="rvp-modal-links" on:click={closeModal}>Application</div>
+          </Link>
           <Link to="contact-us">
             <div class="rvp-modal-links" on:click={closeModal}>Contact Us</div>
           </Link>
@@ -361,6 +475,8 @@
     <Route path="about" component={AboutPage} />
     <Route path="services" component={ServicesPage} />
     <Route path="events" component={EventsPage} />
+    <Route path="robospridh" component={Robospridh} />
+    <Route path="application" component={Application} />
     <Route path="/">
       <HomePage />
     </Route>

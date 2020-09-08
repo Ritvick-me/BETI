@@ -61,7 +61,7 @@
   }
 </style>
 
-<div class="container-fluid text-center rvp-workshop">
+<div class="container-fluid text-center rvp-workshop" id="workshop">
   <Heading {headingName} />
   <div class="container-fluid">
     {#each workshops as workshop, i}
