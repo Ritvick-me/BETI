@@ -32,7 +32,7 @@
   }
 
   function closeModal() {
-    if ((success = "Submission Successful!")) {
+    if (success == "Submission Successful!") {
       fname = lname = father = phone = email = college = branch = year = "";
     }
     success = "";
