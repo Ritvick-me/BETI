@@ -1,3 +1,9 @@
+<script>
+  import ContactsContent from "../Contents/ContactsContent";
+
+  const contacts = ContactsContent.contacts;
+</script>
+
 <style>
   .rvp-footer {
     background-color: var(--black);
@@ -76,7 +82,7 @@
   .rvp-important-links::after {
     position: absolute;
     content: "";
-    left: 3px;
+    left: 0px;
     top: -3%;
     height: 100%;
     width: 1px;
@@ -109,6 +115,14 @@
   }
   .rvp-row-bottom p {
     margin: 0 !important;
+  }
+
+  .rvp-tailor {
+    color: var(--white);
+  }
+
+  .rvp-ritvick {
+    color: var(--orange);
   }
 
   @media (max-width: 1000px) {
@@ -160,7 +174,7 @@
         class="rvp-icons"
         target="_blank"
         style="margin-right: 0px;"
-        href="https://www.facebook.com/Best-embedded-training-institute-357846448318808/?modal=admin_todo_tour">
+        href={contacts.ytLink}>
         <svg
           aria-hidden="true"
           focusable="false"
@@ -182,10 +196,7 @@
             213.508V175.185l142.739 81.205-142.739 81.201z" />
         </svg>
       </a>
-      <a
-        class="rvp-icons"
-        target="_blank"
-        href="https://www.facebook.com/Best-embedded-training-institute-357846448318808/?modal=admin_todo_tour">
+      <a class="rvp-icons" target="_blank" href={contacts.twitterLink}>
         <svg
           aria-hidden="true"
           focusable="false"
@@ -208,10 +219,7 @@
             28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z" />
         </svg>
       </a>
-      <a
-        class="rvp-icons"
-        target="_blank"
-        href="https://www.facebook.com/Best-embedded-training-institute-357846448318808/?modal=admin_todo_tour">
+      <a class="rvp-icons" target="_blank" href={contacts.instaLink}>
         <svg
           aria-hidden="true"
           focusable="false"
@@ -240,10 +248,7 @@
             99.5 9 132.1s2.7 102.7-9 132.1z" />
         </svg>
       </a>
-      <a
-        class="rvp-icons"
-        target="_blank"
-        href="https://www.facebook.com/Best-embedded-training-institute-357846448318808/?modal=admin_todo_tour">
+      <a class="rvp-icons" target="_blank" href={contacts.fbLink}>
         <svg
           aria-hidden="true"
           focusable="false"
@@ -289,7 +294,7 @@
     <div class="col col-12 col-sm-6 col-lg-3 col-xl-2 rvp-footer-content">
       <h5>Contact Us</h5>
       <div class="rvp-call-mail">
-        <a href="tel:+919758428544">
+        <a href="tel:{contacts.phone1}">
           <svg
             aria-hidden="true"
             focusable="false"
@@ -307,12 +312,12 @@
               48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29
               24.29 0 0 0-14.01-27.6z" />
           </svg>
-          <p>+919758428544</p>
+          <p>{contacts.phone1}</p>
         </a>
       </div>
       <br />
       <div class="rvp-call-mail">
-        <a href="tel:+919758428544">
+        <a href="tel:{contacts.phone2}">
           <svg
             aria-hidden="true"
             focusable="false"
@@ -330,12 +335,12 @@
               48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29
               24.29 0 0 0-14.01-27.6z" />
           </svg>
-          <p>+919758428544</p>
+          <p>{contacts.phone2}</p>
         </a>
       </div>
       <br />
       <div class="rvp-call-mail">
-        <a href="mailto:1403beti@gmail.com">
+        <a href="mailto:{contacts.email1}">
           <svg
             aria-hidden="true"
             focusable="false"
@@ -356,12 +361,12 @@
               3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2
               41.8 73.4 41.4z" />
           </svg>
-          <p>1403beti@gmail.com</p>
+          <p>{contacts.email1}</p>
         </a>
       </div>
       <br />
       <div class="rvp-call-mail">
-        <a href="mailto:1403beti@gmail.com">
+        <a href="mailto:{contacts.email2}">
           <svg
             aria-hidden="true"
             focusable="false"
@@ -382,7 +387,7 @@
               3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2
               41.8 73.4 41.4z" />
           </svg>
-          <p>1403beti@gmail.com</p>
+          <p>{contacts.email2}</p>
         </a>
       </div>
     </div>
@@ -396,7 +401,15 @@
   <div class="row justify-content-center">
     <div class="col col-auto text-center rvp-row-bottom">
       <p>Reg. No. MAI/04261/2018-2019</p>
-      <p>Copyright © 2018 Maestros Infotech | All Rights Reserved.</p>
+      <p>Copyright © 2020 BETI | All Rights Reserved.</p>
+      <p class="rvp-tailor">
+        Tailored with zeal &#128293; by
+        <a
+          target="_blank"
+          href="https://www.linkedin.com/in/ritvick-v-pandey-078257188/">
+          <span class="rvp-ritvick">Ritvick V. Pandey</span>
+        </a>
+      </p>
     </div>
   </div>
 </div>

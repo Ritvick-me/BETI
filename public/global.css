@@ -47,3 +47,24 @@ a:hover {
     color: var(--white) !important;
     background: var(--background-selection) !important;
 }
+
+* {
+    outline-offset: 0px !important;
+    outline: none !important;
+    -moz-outline-offset: 0px !important;
+    -moz-outline: none !important;
+}
+
+*:active {
+    outline-offset: 0px !important;
+    outline: none !important;
+    -moz-outline-offset: 0px !important;
+    -moz-outline: none !important;
+}
+
+*:focus {
+    outline-offset: 0px !important;
+    outline: none !important;
+    -moz-outline-offset: 0px !important;
+    -moz-outline: none !important;
+}

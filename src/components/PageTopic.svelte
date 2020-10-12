@@ -10,15 +10,13 @@
       var(--deep-blue) 100%
     );
     background-attachment: fixed;
-    height: 70vh;
-    min-height: auto;
+    min-height: 600px;
     padding: 0 !important;
     margin-top: -80px;
-    position: relative;
   }
   .rvp-top-row {
-    padding-top: 10vh;
-    padding-bottom: 5vh;
+    padding-top: 100px;
+    padding-bottom: 20px;
     max-width: 99vw;
     margin: 0px !important;
     color: white;
@@ -30,7 +28,7 @@
     text-transform: uppercase;
   }
   .rvp-arrow {
-    margin-top: 5vh;
+    margin-top: 20px;
   }
   .rvp-arrow-second-svg {
     margin-top: -40px;
@@ -187,14 +185,13 @@
   }
 
   .rvp-who-we-are {
-    position: absolute;
-    top: 60vh;
-    left: 20vw;
     background-color: var(--orange);
     width: 60vw;
     margin: auto;
+    z-index: 2 !important;
+    margin-top: -150px;
     margin-bottom: 0px;
-    padding: 0px 2vh;
+    padding: 0px 10px;
     border-style: solid;
     border-width: 10px;
     border-color: var(--white);
@@ -205,16 +202,16 @@
     font-family: Robota;
     text-transform: uppercase;
     font-size: 4rem;
-    padding-top: 2vh;
-    padding-bottom: 3vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .rvp-who-we-are p {
     color: white;
     font-family: Helvetica;
     font-size: 1rem;
-    padding-bottom: 3vh;
-    margin-bottom: 0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
   }
 
   .rvp-who-we-are h2::-moz-selection {
@@ -231,7 +228,7 @@
     .rvp-h1 {
       font-size: 7rem;
       height: 7rem;
-      margin-bottom: 3vh;
+      margin-bottom: 15px;
     }
     .rvp-who-we-are {
       left: 10vw;
@@ -332,8 +329,8 @@
       </div>
     </div>
   </div>
-  <div class="rvp-who-we-are text-justify">
-    <h2 class="text-center">{hero.pageTitle}</h2>
-    <p>{hero.pageDescription}</p>
-  </div>
+</div>
+<div class="rvp-who-we-are text-justify">
+  <h2 class="text-center">{hero.pageTitle}</h2>
+  <p>{hero.pageDescription}</p>
 </div>

@@ -1,53 +1,11 @@
 <script>
   import Heading from "../components/Heading-3.svelte";
+  import EventsContent from "../Contents/EventsContent";
   import TutorialCards from "./TutorialCards.svelte";
 
   let headingName = "Tutorials";
 
-  let tutorials = [
-    {
-      title: "Lorem Ipsum",
-      date: "Jan 22, 2020",
-      link: "https://www.youtube.com/",
-      details:
-        "To know how we create a duck, watch this amazing video with live ducks sitting on a beach having just some good me time."
-    },
-    {
-      title: "Epsilon",
-      date: "Jan 22, 2020",
-      link: "https://www.youtube.com/",
-      details:
-        "To know how we create a duck, watch this amazing video with live ducks sitting on a beach having just some good me time."
-    },
-    {
-      title: "Dolores",
-      date: "Jan 22, 2020",
-      link: "https://www.youtube.com/",
-      details:
-        "To know how we create a duck, watch this amazing video with live ducks sitting on a beach having just some good me time."
-    },
-    {
-      title: "Eridany",
-      date: "Jan 22, 2020",
-      link: "https://www.youtube.com/",
-      details:
-        "To know how we create a duck, watch this amazing video with live ducks sitting on a beach having just some good me time."
-    },
-    {
-      title: "Epsilon",
-      date: "Jan 22, 2020",
-      link: "https://www.youtube.com/",
-      details:
-        "To know how we create a duck, watch this amazing video with live ducks sitting on a beach having just some good me time."
-    },
-    {
-      title: "Dolores",
-      date: "Jan 22, 2020",
-      link: "https://www.youtube.com/",
-      details:
-        "To know how we create a duck, watch this amazing video with live ducks sitting on a beach having just some good me time."
-    }
-  ];
+  const tutorials = EventsContent.tutorials;
 </script>
 
 <style>
