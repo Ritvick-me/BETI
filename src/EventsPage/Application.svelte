@@ -1,17 +1,21 @@
 <script>
   import Heading from "../components/Heading-3.svelte";
+  import ContactsContent from "../Contents/ContactsContent";
   import Footer from "../components/Footer.svelte";
 
   let headingName = "Application";
+  const contacts = ContactsContent.contacts;
 
   let fname = "";
   let lname = "";
   let father = "";
-  let contact;
+  let phone;
   let email = "";
   let college = "";
   let branch = "";
   let year;
+
+  let success = "";
 
   function registerationForm() {
     window.$(".rvp-robospridh").removeClass("rvp-release");
@@ -27,7 +31,71 @@
     window.$(".rvp-go-to-top").addClass("rvp-pointer");
   }
 
-  function applyButton() {}
+  function closeModal() {
+    if ((success = "Submission Successful!")) {
+      fname = lname = father = phone = email = college = branch = year = "";
+    }
+    success = "";
+  }
+
+  async function applyButton() {
+    if (
+      !fname ||
+      !lname ||
+      !father ||
+      !phone ||
+      !email ||
+      !college ||
+      !branch ||
+      !year
+    ) {
+      success = "One or more required fields were left empty.";
+      return;
+    }
+    if (
+      phone.length != 10 ||
+      !Number.isInteger(parseFloat(phone)) ||
+      isNaN(phone)
+    ) {
+      if (!Number.isInteger(parseFloat(phone)) || isNaN(phone)) {
+        success = "Phone Number should be an integer value only.";
+      } else if (phone.length != 10) {
+        success = "Phone Number should have exactly 10 digits";
+      }
+      return;
+    }
+    if (!Number.isInteger(parseFloat(year)) || isNaN(year)) {
+      success = "Year is invalid";
+      return;
+    }
+    const application = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fname,
+        lname,
+        father,
+        phone,
+        email,
+        college,
+        branch,
+        year
+      })
+    };
+
+    const promise = await fetch(
+      "http://localhost:3000/events/application",
+      application
+    );
+    if (promise.status == 400) {
+      success = result.success;
+      return;
+    }
+    const result = await promise.json();
+    success = result.success;
+  }
 </script>
 
 <style>
@@ -51,6 +119,56 @@
     -moz-outline-offset: 0px !important;
     -moz-outline: none !important;
   }
+
+  .rvp-result-modal {
+    position: fixed;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 0%;
+    z-index: 999;
+  }
+
+  .rvp-result-expand {
+    width: 100%;
+    height: 100%;
+  }
+
+  .rvp-modal-body {
+    width: 400px;
+    max-width: 95%;
+    margin: 0 2.5%;
+    background-color: var(--white);
+    padding: 16px;
+    box-shadow: 0 0 5px 2px var(--cream);
+  }
+
+  .rvp-modal-body button {
+    border-style: none;
+    background-color: var(--deep-blue);
+    color: var(--white);
+    padding: 8px 16px;
+    text-transform: uppercase;
+    font-family: Helvetica;
+    letter-spacing: 2px;
+  }
+
+  .rvp-modal-heading {
+    color: var(--orange);
+    font-family: Robota;
+    text-transform: uppercase;
+    margin: 0px 8px 8px 8px;
+  }
+
+  .rvp-modal-para {
+    font-family: Helvetica;
+    margin: 0px 8px 8px 8px;
+  }
+
   .rvp-anti-scroll {
     margin: 0;
     padding: 0;
@@ -280,6 +398,15 @@
   }
 </style>
 
+<div
+  class={success ? 'rvp-result-modal rvp-result-expand' : 'rvp-result-modal'}>
+  <div class="rvp-modal-body text-center">
+    <h3 class="rvp-modal-heading text-left">Status</h3>
+    <p class="rvp-modal-para text-left">{success}</p>
+    <button on:click={closeModal}>Close</button>
+  </div>
+</div>
+
 <div class="container-fluid rvp-anti-scroll rvp-overflow-hidden">
   <div class="container-fluid text-center rvp-robospridh rvp-release">
     <div>
@@ -335,10 +462,10 @@
                 Gwalior(M.P) - 474011
                 <br />
                 <br />
-                9758428544, 7457029772, 9027963504
+                {contacts.phone1}, {contacts.phone2}
                 <br />
                 <br />
-                1403beti@gmail.com
+                {contacts.email1}
               </p>
             </div>
           </div>
@@ -366,7 +493,7 @@
               placeholder="Contact*"
               maxlength="10"
               minlength="10"
-              bind:value={contact}
+              bind:value={phone}
               required />
             <input
               class="rvp-input"

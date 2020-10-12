@@ -3,18 +3,25 @@
   import Footer from "../components/Footer.svelte";
 
   let headingName = "Register";
+
   const term = 6;
   const __currentYear = 2017;
   const __participants = 3;
-  let education;
+  let files;
 
-  let year = [];
   let member = [];
   let college = [];
   let branch = [];
   let email = [];
   let phone = [];
   let proof = [];
+  let year = [];
+  let date;
+  let education;
+
+  let data = [];
+
+  let success = "";
 
   function registerationForm() {
     window.$(".rvp-robospridh").removeClass("rvp-release");
@@ -30,7 +37,89 @@
     window.$(".rvp-go-to-top").addClass("rvp-pointer");
   }
 
-  function registerButton() {}
+  function closeModal() {
+    success = "";
+  }
+
+  async function registerButton() {
+    if (
+      member.length != 3 ||
+      college.length != 3 ||
+      branch.length != 3 ||
+      year.length != 3 ||
+      email.length != 3 ||
+      phone.length != 3 ||
+      proof.length != 3 ||
+      !date ||
+      education == "College Category"
+    ) {
+      success = "One or more required fields were left empty.";
+      return;
+    }
+
+    year.forEach(e => {
+      if (!Number.isInteger(parseFloat(e)) || isNaN(e)) {
+        if (!Number.isInteger(parseFloat(e)) || isNaN(e)) {
+          success = "Please select a valid year.";
+        }
+        return;
+      }
+    });
+    if (success) {
+      return;
+    }
+
+    phone.forEach(e => {
+      if (e.length != 10 || !Number.isInteger(parseFloat(e)) || isNaN(e)) {
+        if (!Number.isInteger(parseFloat(e)) || isNaN(e)) {
+          success = "Phone Number should be an integer value only.";
+        } else if (e.length != 10) {
+          success = "Phone Number should have exactly 10 digits";
+        }
+        return;
+      }
+    });
+    if (success) {
+      return;
+    }
+
+    if (email[0] == email[1] || email[0] == email[2] || email[1] == email[2]) {
+      success = "Two or more people cannot have the same email.";
+      return;
+    }
+
+    const attendees = {
+      member,
+      college,
+      branch,
+      email,
+      phone,
+      year
+    };
+
+    const formData = new FormData();
+
+    const fileInput = document.querySelectorAll(".rvp-collegeID");
+    fileInput.forEach(e => {
+      const file = e.files[0];
+      formData.append("proof", file);
+    });
+
+    Object.keys(attendees).forEach(e => {
+      attendees[e].forEach(t => {
+        formData.append(e, t);
+      });
+    });
+
+    formData.append("date", date);
+    formData.append("education", education);
+
+    const promise = await fetch("http://localhost:3000/events/robospridh", {
+      method: "POST",
+      body: formData
+    });
+    const result = await promise.json();
+  }
 </script>
 
 <style>
@@ -54,6 +143,55 @@
     -moz-outline-offset: 0px !important;
     -moz-outline: none !important;
   }
+  .rvp-result-modal {
+    position: fixed;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 0%;
+    z-index: 999;
+  }
+
+  .rvp-result-expand {
+    width: 100%;
+    height: 100%;
+  }
+
+  .rvp-modal-body {
+    width: 400px;
+    max-width: 95%;
+    margin: 0 2.5%;
+    background-color: var(--white);
+    padding: 16px;
+    box-shadow: 0 0 5px 2px var(--cream);
+  }
+
+  .rvp-modal-body button {
+    border-style: none;
+    background-color: var(--deep-blue);
+    color: var(--white);
+    padding: 8px 16px;
+    text-transform: uppercase;
+    font-family: Helvetica;
+    letter-spacing: 2px;
+  }
+
+  .rvp-modal-heading {
+    color: var(--orange);
+    font-family: Robota;
+    text-transform: uppercase;
+    margin: 0px 8px 8px 8px;
+  }
+
+  .rvp-modal-para {
+    font-family: Helvetica;
+    margin: 0px 8px 8px 8px;
+  }
+
   .rvp-anti-scroll {
     margin: 0;
     padding: 0;
@@ -260,6 +398,15 @@
   }
 </style>
 
+<div
+  class={success ? 'rvp-result-modal rvp-result-expand' : 'rvp-result-modal'}>
+  <div class="rvp-modal-body text-center">
+    <h3 class="rvp-modal-heading text-left">Status</h3>
+    <p class="rvp-modal-para text-left">{success}</p>
+    <button on:click={closeModal}>Close</button>
+  </div>
+</div>
+
 <div class="container-fluid rvp-anti-scroll rvp-overflow-hidden">
   <div class="container-fluid text-center rvp-robospridh rvp-release">
     <div>
@@ -292,7 +439,7 @@
     </div>
     <Heading {headingName} />
     <div class="container text-left rvp-form">
-      <form>
+      <form id="form">
         {#each Array(__participants) as _, i}
           <div class="rvp-participant-section">
             <h3 class="rvp-participant">Participant {i + 1}:</h3>
@@ -351,7 +498,7 @@
               <label for="proof" class="rvp-id-proof">College ID proof:</label>
               <input
                 bind:value={proof[i]}
-                class="rvp-input rvp-input-break"
+                class="rvp-input rvp-input-break rvp-collegeID"
                 type="file"
                 accept="image/*"
                 placeholder="Phone*"
@@ -363,6 +510,7 @@
         <input
           class="rvp-input rvp-input-break"
           type="date"
+          bind:value={date}
           placeholder="Phone*"
           required />
         <!-- College Category -->
@@ -370,8 +518,8 @@
           bind:value={education}
           class="rvp-input rvp-input-break"
           required>
-          <option value="">College Category</option>
-          <option value="IIT" placeholder="Select">IIT</option>
+          <option>College Category</option>
+          <option placeholder="Select">IIT</option>
         </select>
         <br />
         <div class="rvp-button-center">
